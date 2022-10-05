@@ -1,0 +1,25 @@
+<h2>商品編集画面</h2>
+
+<%= form_with model: @item, url: admin_item_path(@item.id) do |f| %>
+  
+  
+    <h4>商品名
+      <%= f.text_field :name %></h4>
+
+    <h4><%= f.label :ジャンル ,class: "col-xs-3 fix" %>
+      <%= f.collection_select :genre_id, Genre.all, :id, :name %></h4>
+  
+      
+    <h4>商品説明文
+      <%= f.text_area :introduction %></h4>
+      
+            
+    <h4>税抜き価格
+      <%= f.text_field :price %></h4>
+      
+            
+    <h4>販売ステータス
+      <%= f.select :is_active, ["販売中", "販売中止"] %></h4>
+      
+    <%= f.submit '保存' %>
+  <% end %>
