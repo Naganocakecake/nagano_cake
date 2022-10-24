@@ -24,13 +24,16 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   end
   
    namespace :public do
+     resources :items
      resources :cart_items
      resources :customers
      resources :homes
      resources :orders
      resources :sipping_addresses
+
    end
-   
+get "/about" => "public/homes#about", as: "about"
 root to: "public/homes#top"
+
   
 end

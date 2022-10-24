@@ -7,10 +7,11 @@
   <tr>
     <th>会員ID</th>
     <td><%= @customers.id %>
-    <% if @customers.is_deleted == false "有効会員" %>
-   <% else %>
-     退会済みユーザー
-   <% end %>      
+    <%if @customers.is_deleted == true %>
+    退会済み
+    <% else %>
+    有効会員
+    <% end %>
     </td>
   </tr>
   

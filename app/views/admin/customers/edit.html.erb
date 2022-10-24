@@ -45,12 +45,14 @@
   
     <tr>
     <th>会員ステータス</th>
-    <td><%= f.radio_button :is_deleted, "有効" ,checked: "checked"%> 有効会員 <%= f.radio_button :is_deleted, "無効" %> 退会済み</td>
+    <td><%= f.radio_button :is_deleted, false %> 有効会員 <%= f.radio_button :is_deleted, true %> 退会済み</td>
   </tr>
   
 </div> 
 </table>
 <%= f.submit "変更を保存する", class:"btn btn-primary" %>
-
+<%= link_to :back do %>
+  <button>戻る</button>
+<% end %>
   
   <% end %>
