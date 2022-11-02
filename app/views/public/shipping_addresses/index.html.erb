@@ -1,0 +1,65 @@
+
+<div class="container takasa">
+	<h2>配送先登録/一覧</h2><br>
+
+<%= form_with model: @address, url:public_shipping_addresses_path do |f| %>
+    <div class="row">
+      <div class="col-sm-3">
+  <label for="postal_code">郵便番号(ハイフンなし)</label>
+  </div>
+  <div class="col-sm-6">
+  <%= f.text_field :postal_code, placeholder:"0000000" %>
+  </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-3">
+  <label for="address_string">住所</label>
+  </div>
+  <div class="col-sm-6">
+  <%= f.text_field :shipping_address, :size => "40*40", placeholder:"東京都渋谷区代々木神園町0-0"  %>
+  </div>
+  </div>
+  
+    <div class="row">
+    <div class="col-sm-3">
+  <label for="name">宛名</label>
+  </div>
+  <div class="col-sm-6">
+  <%= f.text_field :name, placeholder:"令和道子"  %>
+  </div>
+  <div class="col-sm-2">
+  <%= f.submit "新規登録", class: "btn btn-success" %>
+  
+  </div>
+  </div>
+
+  <% end %>
+  
+  <div class="row">
+
+     <table  class="table table-bordered">
+  <thead>
+  <tr>
+    <th>郵便番号</th>
+    <th>住所</th>
+    <th>宛名</th>
+    <th></th>
+  </tr>
+  </thead>
+  <% @addresses.each do |address| %>
+  <tbody>
+    <tr>
+      <td><%= address.postal_code %></td>
+      <td><%= address.shipping_address %></td>
+      <td><%= address.name %></td>
+      <td>
+      <%= link_to "編集する", edit_public_shipping_address_path(address),method: :get , class: "btn btn-success" %>　　<%= link_to "削除する", public_shipping_addresses_path(address), method: :delete , class: "btn btn-danger" %><!-- pathにid必要 public_address_path-->
+      </td>
+    </tr>
+  </tbody>
+  <% end %>
+  </table>
+    </div>
+  </div>
+  

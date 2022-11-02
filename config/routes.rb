@@ -24,15 +24,22 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   end
   
    namespace :public do
+     delete '/cart_item/destroy_all' => 'cart_items#destroy_all'
      resources :items
      resources :cart_items
      resources :customers
      resources :homes
+     get '/orders/confirm' => 'orders#confirm'
+     get '/orders/thanks' => 'orders#thanks'
      resources :orders
-     resources :sipping_addresses
+     post "/orders/confirm" => "orders#confirm"
+     resources :shipping_addresses
+
 
    end
-get "/about" => "public/homes#about", as: "about"
+    get "/customers/quit" => "public/customers#quit"
+    get "/about" => "public/homes#about", as: "about"
+    get "/customers/my_page" => "public/customers#show"
 root to: "public/homes#top"
 
   

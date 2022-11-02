@@ -2,6 +2,8 @@
 
   <%= form_with model: @item, url: admin_items_path do |f| %>
   
+    <h4>商品画像
+      <%= f.file_field :image, accept: "image/*" %></h4>
   
   
     <h4>商品名
@@ -20,7 +22,10 @@
       
             
     <h4>販売ステータス
-      <%= f.select :is_active, ["販売中", "販売中止"] %></h4>
-      
+  <%= f.radio_button :is_active, :true %>
+  <%= f.label :is_active, "販売中", {value: :true, style: "display: inline-block;"} %>
+  <%= f.radio_button :is_active, :false %>
+  <%= f.label :is_active, "販売停止", {value: :false, style: "display: inline-block;"} %>
+
     <%= f.submit '商品登録' %>
   <% end %>

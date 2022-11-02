@@ -7,6 +7,7 @@
 <table>
   <thead>
   <tr>
+    <th>商品画像</th>
     <th>商品ID</th>
     <th>商品名</th>
     <th>ジャンル</th>
@@ -18,6 +19,11 @@
   <% @items.each do |item| %>
   <tbody>
     <tr>
+  <td><% if item.image.attached? %>
+    <%= image_tag item.image, size: "100x100" %>
+  <% else %>
+    <%= image_tag 'no_image', size: "100x100" %>
+  <% end %></td>
       <td><%= item.id %></td>
       <td><%= link_to admin_item_path(item.id) do %>
         <%= item.name %>
@@ -25,7 +31,11 @@
       <td><%= item.genre.name %></td>
       <td><%= item.introduction %></td>
       <td><%= item.price %></td>
-      <td><%= item.is_active %></td>
+      <td>                <% if item.is_active %>
+                   販売中
+                  <% else %>
+                  販売停止
+                <% end %></td>
     </tr>
   </tbody>
   <% end %>

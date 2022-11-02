@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <h3>商品一覧</h3>   
+    <strong> 全<%= @items.count %>件 </strong>
+      <div class="col-md-9" >
+        <% @items.each do |item| %>
+          <div class="item">
+            <%= link_to public_item_path(item.id) do %>
+              <% if item.image.attached? %>
+                <%= image_tag item.image, size: "100x100" %>
+              <% else %>
+                <%= image_tag 'no_image', size: "100x100" %>
+              <% end %>
+            <% end %><br>
+          <p><%= item.name %></p>
+          <p>¥<%= item.price %></p>
+        <% end %>
+          </div>
+      </div>
+    </div>
+  </div>

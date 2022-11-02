@@ -1,0 +1,38 @@
+
+<div class="container takasa">
+	<h2>配送先編集</h2><br>
+
+<%= form_with model: @address, url:public_shipping_address_path do |f| %>
+
+    <div class="row">
+      <div class="col-sm-3">
+  <label for="postal_code">郵便番号(ハイフンなし)</label>
+  </div>
+  <div class="col-sm-6">
+  <%= f.text_field :postal_code %>
+  </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-3">
+  <label for="address_string">住所</label>
+  </div>
+  <div class="col-sm-6">
+  <%= f.text_field :shipping_address, :size => "40*40" %>
+  </div>
+  </div>
+  
+    <div class="row">
+    <div class="col-sm-3">
+  <label for="name">宛名</label>
+  </div>
+  <div class="col-sm-6">
+  <%= f.text_field :name %>
+  </div>
+  <div class="col-sm-2">
+  <%= f.submit "変更内容を保存", class: "btn btn-success" %>
+  <% end %>
+  
+  </div>
+  </div>
+  </div>

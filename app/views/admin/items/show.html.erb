@@ -2,7 +2,11 @@
 
 <h2>商品詳細ページ</h2>
 
-
+  <% if @items.image.attached? %>
+    <%= image_tag @items.image, size: "100x100" %>
+  <% else %>
+    <%= image_tag 'no_image', size: "200x200" %>
+  <% end %>
 <div class="col-md-8 offset-md-1"> 
 <table>
   <thead>
@@ -23,7 +27,11 @@
       <td><%= @items.genre.name %></td>
       <td><%= @items.introduction %></td>
       <td><%= @items.price %></td>
-      <td><%= @items.is_active %></td>
+      <td><% if @items.is_active %>
+                   販売中
+                  <% else %>
+                  販売停止
+                <% end %></td>
       <td><%= link_to "編集", edit_admin_item_path(@items.id) %> </td>
     </tr>
   </tbody>

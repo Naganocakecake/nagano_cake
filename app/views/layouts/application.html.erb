@@ -1,21 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WorkGithub</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>ながのCAKE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', media: 'all','data-turbolinks-track': 'reload' %>
     
-  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-  
-  <%= link_to "ログイン", new_customer_session_path %>
   </head>
 
 
   <body>
+      <header>
+
+        <nav class="navbar navbar-default shadow-sm">
+        <div class="container">
+          <div class="row">
+
+          <a class="navbar-brand p-3" href="/"><%= image_tag 'logo4.png' %></a>
+                  <% if customer_signed_in? %>
+          </div>
+          <div class="row">
+            ようこそ、<%= current_customer.last_name %>さん！
+          </div>
+          
+          <div class="row">
+          <%= link_to "マイページ", customers_my_page_path, class:"btn btn-light"  %>
+          <%= link_to "商品一覧", public_items_path, class:"btn btn-light" %>
+          <%= link_to "カート", public_cart_items_path, class:"btn btn-light" %>
+          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-light" %>
+        <% else %>
+          <%= link_to "About", about_path, class:"btn btn-light" %>
+          <%= link_to "商品一覧", public_items_path, class:"btn btn-light" %>
+          <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-light" %>
+          <%= link_to "ログイン", new_customer_session_path, class:"btn btn-light" %>
+          <% end %>
+
+        </div>
+        </div>
+        
+        </nav>
+        
+      </header>
+
+
     <%= yield %>
+    </div>
   </body>
 </html>
