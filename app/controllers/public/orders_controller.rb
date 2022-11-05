@@ -6,6 +6,7 @@ class Public::OrdersController < ApplicationController
   
   def index
     @orders = current_customer.orders
+
   end
   
   def show
@@ -26,7 +27,7 @@ class Public::OrdersController < ApplicationController
         order_detail.price = cart_item.item.price
         order_detail.amount = cart_item.amount
         order_detail.item_id = cart_item.item_id
-        order_detail.making_status = 1
+        order_detail.making_status = 0
         order_detail.save!
       end
       @cart_items.destroy_all
@@ -76,6 +77,6 @@ class Public::OrdersController < ApplicationController
 
 private
 def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :address, :name, :total_payment, :shipping_cost, :status)
+    params.require(:order).permit(:payment_method, :postal_code, :address, :name, :total_payment, :shipping_cost, :status, :amount)
 end
 end

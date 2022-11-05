@@ -60,8 +60,10 @@
   <%= form_with model: @order, url: public_orders_path, local: true do |f| %>
   <div class="row">
     <h3>支払方法</h3>
-      <h4><%= @order.payment_method %></h4>
+      <h4><%= @order.payment_method_i18n %></h4>
       <%= f.hidden_field :payment_method, :value => @order.payment_method %></br>
+      </div>
+      <div class="row">
     <h3>お届け先</h3>
       <%= @order.postal_code.to_s.insert(3, "-") %></br>
       <%= f.hidden_field :postal_code, :value => @order.postal_code %>

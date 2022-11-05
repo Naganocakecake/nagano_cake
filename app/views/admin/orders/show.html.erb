@@ -1,0 +1,74 @@
+<div class="container takasa">
+	<h2><i class="fas fa-box-open"></i>注文履歴詳細</h2><br>
+	<div class="row">
+		<div class="col-xs-6">
+			<p>注文情報</p>
+			<table align="left" class="table table-bordered">
+				<tr>
+					<td>注文日</th>
+					<td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+				</tr>
+				<tr>
+					<td>配送先</td>
+					<td>〒<%= @order.postal_code %><br><%= @order.address %><br><%= @order.name %></td>
+				</tr>
+				<tr>
+					<td>支払方法</td>
+					<td><%= @order.payment_method_i18n  %></td>
+				</tr>
+				<tr>
+			        <th>注文ステータス</th>
+			        <td>  <%= form_with model: @order, url: admin_order_path(@order.id) do |f| %>
+			        			<%#間違い= f.select :status,["waiting_for_payment","payment_confirmation","production","shipping_preparation","sent" ] ,style: "margin-top:10px;#" %>
+          					<%= f.select :status, Order.statuses_i18n.keys.map{|k| [I18n.t("enums.order.status.#{k}"), k]} %>
+          			<%= f.submit "更新" ,class: "btn btn-success btn-sm" %><% end %></td>
+        		</tr>
+				</tr>
+			</table>
+
+			<p>注文内容</p>
+				<table class="table table-bordered">
+					<tr>
+						<th>商品</th>
+						<th>単価（税込み)</th>
+						<th>個数</th>
+						<th>小計</th>
+						<th>製作ステータス</th>
+					</tr>
+					<% @order_details.each do |order_detail| %>
+					<tr>
+						<td><%= order_detail.item.name %></td>
+						<td><%= order_detail.item.with_tax_price.to_s(:delimited) %></td>
+						<td><%= order_detail.amount %></td>
+						<td><%= (order_detail.item.with_tax_price.to_i * order_detail.amount) %>
+							<% @total += (order_detail.item.with_tax_price.to_i * order_detail.amount) %>
+						</td>
+						
+						<td><%= form_with model: order_detail, url: admin_order_detail_path(order_detail), local: true do |f| %>
+			        	<%= f.select :making_status, OrderDetail.making_statuses_i18n.keys.map{|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
+          			<%= f.submit "更新" ,class: "btn btn-success btn-sm" %><% end %></td>
+					</tr>
+					<% end %>
+				</table>
+			</div>
+			<div class="col-xs-6">
+				<div class="row">
+				  <br><p>請求情報</p>
+				  <table class="table table-bordered">
+					<tr>
+						<td>商品合計</td>
+						<th><%= @total %></th>
+					</tr>
+					<tr>
+						<td>配送料</td>
+						<th>800</th>
+					</tr>
+					<tr>
+						<td>ご請求額</td>
+						<th><%= @total + 800 %></th>
+					</tr>
+				  </table>
+		        </div>
+		</div>
+	</div>
+</div>

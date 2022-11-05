@@ -15,6 +15,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
    namespace :admin do
     get '/' => 'homes#top'
+    root to: "admin/homes#top"
     resources :items
     resources :homes
     resources :customers
@@ -38,6 +39,8 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
    end
     get "/customers/quit" => "public/customers#quit"
+    get "/customers/withdraw" => "public/customers#withdraw"
+    post "/customers/withdraw" => "public/customers#withdraw"
     get "/about" => "public/homes#about", as: "about"
     get "/customers/my_page" => "public/customers#show"
 root to: "public/homes#top"

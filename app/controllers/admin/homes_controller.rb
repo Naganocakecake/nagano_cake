@@ -1,7 +1,10 @@
 class Admin::HomesController < ApplicationController
-
+  
   def top
-    @order = Order.where(created_at: range) 
+    @order_details = OrderDetail
+    @order_details = OrderDetail.page(params[:page])
   end
+
+
 
 end
